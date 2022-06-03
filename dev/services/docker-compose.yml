@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    container_name: vendease-backend
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=vendease-backend
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/datah
+  test-db:
+    image: postgres:latest
+    container_name: vendease-backend-test
+    restart: always
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=vendease-backend-test
+    ports:
+      - '5436:5432'
+    volumes:
+      - db:/var/lib/postgresql/datag
+volumes:
+  db:
+    driver: local
