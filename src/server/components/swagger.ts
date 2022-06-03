@@ -35,6 +35,23 @@ const documentation = {
                 tags: ['Episodes'],
                 description: 'Returns episodes',
                 operationId: 'getEpisodes',
+                parameters: [
+                    {
+                        name: "characterId",
+                        in: "query",
+                        type: "integer",
+                        description: "returns episodes by character ID",
+                        required: false,
+                    },
+                    {
+                        name: "$fields",
+                        in: "query",
+                        type: "string",
+                        description: "filters fields and returns only fields the client wants to see",
+                        required: false,
+                        example: "name,code,releaseDate,commentCount"
+                    }
+                ],
                 responses: {
                     '200': {
                         description: 'Returns a list of episodes sorted by releaseDate from oldest to newest',
@@ -51,38 +68,6 @@ const documentation = {
                                         code: "SAMPLE",
                                         releaseDate: "2022-03-01 20:04:49.16+00"
                                     }]
-                                }
-                            }
-                        }
-                    },
-                }
-            }
-        },
-        '/api/v1/episodes/{character}': {
-            get: {
-                tags: ['Episodes'],
-                description: 'Returns episodes a character was featured in',
-                operationId: 'getEpisodesByCharacter',
-                parameters: [
-                    {
-                        name: "characterId",
-                        in: "path",
-                        type: "integer",
-                        description: "returns episodes by character ID",
-                    },
-                ],
-                responses: {
-                    200: {
-                        description: 'Returns a list of episodes',
-                        content: {
-                            'application/json': {
-                                schema: {
-                                    $ref: '#/components/schemas/Response'
-                                },
-                                example: {
-                                    code: 0,
-                                    msg: 'Success',
-                                    data: [{}]
                                 }
                             }
                         }
@@ -152,8 +137,17 @@ const documentation = {
                         required: true,
                         type: "integer",
                         format: "int64"
+                    },
+                    {
+                        name: "$fields",
+                        in: "query",
+                        type: "string",
+                        description: "filters fields and returns only fields the client wants to see",
+                        required: false,
+                        example: "comment,ipAddressLocation,episodeId"
                     }
                 ],
+
                 responses: {
                     '200': {
                         description: 'Returns a list of comments in reverse chronological order',
@@ -181,7 +175,7 @@ const documentation = {
             post: {
                 tags: ['Characters'],
                 description: 'Returns characters',
-                operationId: 'getCharacter',
+                operationId: 'findCharacter',
                 parameters: [
                     {
                         name: "filters",
@@ -204,7 +198,7 @@ const documentation = {
                         },
                     },
                     {
-                        name: "sort",
+                        name: "sorts",
                         in: "body",
                         type: "object",
                         properties: {
@@ -221,7 +215,7 @@ const documentation = {
                 ],
                 responses: {
                     200: {
-                        description: 'Returns a list of characters',
+                        description: 'Returns a list of characters that can be sorted and filtered',
                         content: {
                             'application/json': {
                                 schema: {

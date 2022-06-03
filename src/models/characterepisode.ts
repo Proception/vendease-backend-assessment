@@ -26,15 +26,5 @@ const CharacterEpisode = (
 
   return characterEpisode;
 };
-// @ts-nocheck
-
-// Characterepisode.associate = (models) => {
-//     // associations can be defined here
-//     Characterepisode.belongsTo(models.Episode, {
-//         foreignKey: 'episodeId',
-//         onDelete: 'CASCADE',
-//         onUpdate: 'CASCADE',
-//     });
-// };
 
 module.exports = CharacterEpisode;

@@ -4,12 +4,10 @@ import { validationResult } from "express-validator";
 import { ResponseObject } from "../types/shared";
 
 const errorCodes = {
-  0: "Success",
-  1: "Method Not Allowed",
-  2: "Internal Server Error",
-  3: "Requested Resource Not Available",
-  4: "Validation Error",
-  5: "Invalid Episode ID",
+  200: "Success",
+  500: "Internal Server Error",
+  400: "Validation Error",
+  404: "Not Found",
 };
 
 /**
@@ -26,7 +24,7 @@ const payloadValidator = (req: Request, res: Response, next: NextFunction) => {
     return res
       .status(400)
       .json(
-        ApiResponse({ code: 4, msg: errorCodes[4], errors: errors.array() })
+        ApiResponse({ code: 400, msg: errorCodes[400], errors: errors.array() })
       );
   }
   next();

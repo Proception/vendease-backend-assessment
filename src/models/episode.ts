@@ -23,11 +23,4 @@ const Episode = (
   return episode;
 };
 
-// Episode.associate = (models: any) => {
-//     // associations can be defined here
-//     Episode.hasMany(models.Comment, {
-//         foreignKey: 'episodeId'
-//     });
-// };
-
 module.exports = Episode;

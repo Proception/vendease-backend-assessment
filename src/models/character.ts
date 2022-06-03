@@ -17,19 +17,9 @@ const Character = (
     {}
   );
 
-  character.Location = character.hasOne(Location);
-  // character.Episodes = character.hasMany(CharacterEpisodes, { foreignKey: 'characterId' })
+  character.Location = character.belongsTo(Location, { foreignKey: 'location' });
 
   return character;
 };
-// Character.associate = (models) => {
-//     // associations can be defined here
-//     Character.hasOne(models.Location, {
-//         foreignKey: 'characterId',
-//     });
-//     Character.hasMany(models.CharacterEpisode, {
-//         foreignKey: 'characterId',
-//     });
-// };
 
 module.exports = Character;

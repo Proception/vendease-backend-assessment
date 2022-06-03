@@ -7,12 +7,6 @@ const ssl = process.env.NODE_ENV === "production";
 const genericOptions = {
   dialect: "postgres",
   protocol: "postgres",
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    },
-  },
   logging: false,
   port: CONFIG.database.port,
 };
@@ -20,7 +14,10 @@ const genericOptions = {
 let sequelizeInstance;
 if (CONFIG?.database?.url) {
   /* istanbul ignore next */
-  sequelizeInstance = new Sequelize(CONFIG.database.url, genericOptions);
+  sequelizeInstance = new Sequelize(CONFIG.database.url, {...genericOptions, ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }});
 } else {
   sequelizeInstance = new Sequelize(
     CONFIG.database.database,

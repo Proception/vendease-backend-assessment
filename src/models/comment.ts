@@ -14,22 +14,7 @@ const Comment = (
     {}
   );
 
-  // comment.Episode = comment.belongsTo(Episode, {
-  //     foreignKey: 'episodeId',
-  //     onDelete: 'CASCADE',
-  //     onUpdate: 'CASCADE',
-  // });
-
   return comment;
 };
-
-// Comment.associate = (models) => {
-//     // associations can be defined here
-//     Comment.belongsTo(models.Character, {
-//         foreignKey: 'episodeId',
-//         onDelete: 'CASCADE',
-//         onUpdate: 'CASCADE',
-//     });
-// };
 
 module.exports = Comment;
