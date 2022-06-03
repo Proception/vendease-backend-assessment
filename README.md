@@ -14,12 +14,10 @@ The app can be configured using environment variables:
 
 - **`NAME`** the application name. Default: `name` in [`package.json`](./package.json).
 - **`VERSION`** the application version. It's automatically set by deployment script as the deploy tag. Default: `version` in [`package.json`](./package.json).
-- **`NODE_ENV`** the environment the application will be running in. Default: `dev`.
+- **`NODE_ENV`** the environment the application will be running in. Default: `local`.
 - **`SERVER_PORT`** or **`PORT`** the port the application will be running on. Default: `8080`.
 - **`SERVER_HOST`** or **`HOST`** the host the application will be running on. Default: `0.0.0.0`.
-- **`POSTGRES_URL`** the connection string to MongoDB.
-- **`SWAGGER_ENABLED`** whether swagger is enabled. Default: `true` for `dev`, `false` for else.
-- **`LOG_LEVEL`** minimum log level to show. Default: `debug` for `dev`, `info` for else.
+- **`POSTGRES_URL`** the connection string to PostgresDB.
 
 ## Usage
 
@@ -29,7 +27,7 @@ Make sure requirements are satisfied.
 
 * `npm ci` - to install dependencies.
 * `cd dev/services && docker-compose up -d` - to start the postgres docker containers for development and test environment
-* `npm run migrate-up` - to fill in the development database with the episode, character, location, and comments data
+* `npm run db:migrate` and `npm run db:seed` - to fill in the development database with the episode, character, location, and comments data
 * `npm test` - to run tests.
 
 Start the app in the development mode with any options e.g.:
