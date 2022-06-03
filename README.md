@@ -35,3 +35,6 @@ Start the app in the development mode with any options e.g.:
 ```
 HOST="localhost" npm run dev
 ```
+
+To see the swagger [documentation](https://vendease-assessment.herokuapp.com/documentation), visit this [url](https://vendease-assessment.herokuapp.com/documentation)
+
