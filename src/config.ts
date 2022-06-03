@@ -8,8 +8,8 @@ const config = (() => {
                     port: 8080
                 },
                 database: {
-                    url: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5436/vendease-backend',
-                    dialect: process.env.PROD_DIALECT
+                    url: process.env.DATABASE_URL,
+                    dialect: process.env.PROD_DIALECT,
                 }
             };
         case "test":

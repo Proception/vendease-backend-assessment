@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf ./dist && npx tsc --noEmit false",
+    "tsc": "tsc",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "start:prod": "npm run build && && node dist/index.js",
+    "start:prod": "npm run tsc && NODE_ENV=production node dist/index.js",
     "test": "jest --forceExit",
     "format": "prettier --write src/**/*.ts",
     "lint": "eslint --fix src/**/*.ts",

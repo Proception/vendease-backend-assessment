@@ -1,8 +1,7 @@
-// @ts-nocheck
-import Sequelize from "sequelize";
+const Sequelize =  require("sequelize");
 
-import CONFIG from "../config";
-import logger from "src/util/logger"
+const CONFIG = require("../config");
+import logger from "../util/logger";
 
 const ssl = process.env.NODE_ENV === "production";
 const genericOptions = {
@@ -16,9 +15,9 @@ const genericOptions = {
 };
 
 let sequelizeInstance;
-if (process.env.DATABASE_URL) {
+if (CONFIG?.database?.url) {
   /* istanbul ignore next */
-  sequelizeInstance = new Sequelize(process.env.DATABASE_URL, genericOptions);
+  sequelizeInstance = new Sequelize(CONFIG.database.url, genericOptions);
 } else {
   sequelizeInstance = new Sequelize(
     CONFIG.database.database,
@@ -31,9 +30,9 @@ if (process.env.DATABASE_URL) {
 sequelizeInstance
   .authenticate()
   .then(() => {
-    logger.info("Connection has been established successfully.");
+    logger.error("Connection has been established successfully.");
   })
-  .catch((err) => {
+  .catch((err: any) => {
     logger.error("Unable to connect to the database:", err);
   });
 

@@ -16,7 +16,7 @@ const CreateCommentController = async (req: Request, res: Response) => {
     const { episodeId, comment } = req.body
     let ipAddressLocation;
     if (req.headers['x-forwarded-for'] !== undefined && req.headers['x-forwarded-for']?.length > 0) {
-        ipAddressLocation = req.headers['x-forwarded-for'][0]
+        ipAddressLocation =  req.headers['x-forwarded-for'][0]
     } else {
         ipAddressLocation = req.socket.remoteAddress
     }

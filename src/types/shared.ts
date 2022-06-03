@@ -5,14 +5,14 @@ type ResponseObject = {
   errors?: any;
 };
 type Status = {
-  ACTIVE;
-  DEAD;
-  UNKNOWN;
+  ACTIVE: string;
+  DEAD: string;
+  UNKNOWN: string;
 };
 
 type Gender = {
-  MALE;
-  FEMALE;
+  MALE: string;
+  FEMALE: string;
 };
 
 type Character = {
@@ -28,8 +28,7 @@ type Character = {
 type Location = {
   name: string;
   latitude: number;
-  longitude;
-  number;
+  longitude: number;
 };
 
 type Episode = {
@@ -42,7 +41,7 @@ type Episode = {
 
 type Comment = {
   comment: string;
-  ipAddressLocation: string;
+  ipAddressLocation: string | undefined | null;
   episodeId?: number;
 };
 
