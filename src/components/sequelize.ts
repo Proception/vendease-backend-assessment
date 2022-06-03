@@ -2,6 +2,7 @@
 import Sequelize from "sequelize";
 
 import CONFIG from "../config";
+import logger from "src/util/logger"
 
 const ssl = process.env.NODE_ENV === "production";
 const genericOptions = {
@@ -30,10 +31,10 @@ if (process.env.DATABASE_URL) {
 sequelizeInstance
   .authenticate()
   .then(() => {
-    console.log("Connection has been established successfully.");
+    logger.info("Connection has been established successfully.");
   })
   .catch((err) => {
-    console.error("Unable to connect to the database:", err);
+    logger.error("Unable to connect to the database:", err);
   });
 
 export default sequelizeInstance;

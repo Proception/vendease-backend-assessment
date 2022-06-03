@@ -4,8 +4,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-console.log({})
-
 module.exports = {
     development: {
         ...CONFIG.database,

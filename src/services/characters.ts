@@ -5,7 +5,6 @@ const findCharacters = async ({ filters, sort }: any) => {
   // for (const sort in sorts) {
   //     sortArray.push([sorts, sorts[sort]])
   // }
-  console.log({ filters });
   const characters = CharacterModel.findAll({
     // order: sortArray,
     where: { ...filters },
