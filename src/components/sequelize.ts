@@ -8,7 +8,10 @@ const genericOptions = {
   dialect: "postgres",
   protocol: "postgres",
   dialectOptions: {
-    ssl,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    },
   },
   logging: false,
   port: CONFIG.database.port,
