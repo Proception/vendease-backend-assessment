@@ -5,7 +5,7 @@ const config = (() => {
         case "production":
             return {
                 app: {
-                    port: 8080
+                    port: process.env.PORT
                 },
                 database: {
                     url: process.env.DATABASE_URL,
@@ -15,7 +15,7 @@ const config = (() => {
         case "test":
             return {
                 app: {
-                    port: 8081
+                    port: process.env.PORT || 8081
                 },
                 database: {
                     username: process.env.DB_USER_TEST || 'test',
@@ -29,7 +29,7 @@ const config = (() => {
         case "local":
             return {
                 app: {
-                    port: 8080
+                    port: process.env.PORT || 8080
                 },
                 database: {
                     username: process.env.DB_USER || 'postgres',
