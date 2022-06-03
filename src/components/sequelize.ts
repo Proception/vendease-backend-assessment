@@ -17,8 +17,11 @@ const genericOptions = {
 let sequelizeInstance;
 if (CONFIG?.database?.url) {
   /* istanbul ignore next */
-  sequelizeInstance = new Sequelize(CONFIG.database.url, { dialectOptions: {
-          ssl
+  sequelizeInstance = new Sequelize(CONFIG.database.url, { ...genericOptions, dialectOptions: {
+          ssl: {
+              require: true,
+              rejectUnauthorized: false
+          }
       }});
 } else {
   sequelizeInstance = new Sequelize(
