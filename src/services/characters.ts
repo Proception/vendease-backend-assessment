@@ -1,5 +1,5 @@
 import {CharacterModel, LocationModel} from "../models";
-import Sequelize from "sequelize";
+const Sequelize = require("sequelize");
 
 const findCharacters = async ({ filters, sorts }: any) => {
   let sortArray = []

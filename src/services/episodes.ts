@@ -1,5 +1,3 @@
-import logger from "../util/logger";
-
 const Sequelize = require("sequelize");
 
 import {
