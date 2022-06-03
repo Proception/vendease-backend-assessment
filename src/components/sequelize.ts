@@ -9,15 +9,20 @@ const genericOptions = {
   protocol: "postgres",
   logging: false,
   port: CONFIG.database.port,
+    dialectOptions: {
+        ssl
+    },
 };
 
 let sequelizeInstance;
 if (CONFIG?.database?.url) {
   /* istanbul ignore next */
-  sequelizeInstance = new Sequelize(CONFIG.database.url, {...genericOptions, ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }});
+  sequelizeInstance = new Sequelize(CONFIG.database.url, { ...genericOptions, dialectOptions: {
+          ssl: {
+              require: true,
+              rejectUnauthorized: false
+          }
+      }});
 } else {
   sequelizeInstance = new Sequelize(
     CONFIG.database.database,
