@@ -7,4 +7,4 @@ import jsonMask from 'json-mask';
  * @param {string} fields to be filtered
  * @description removes fields not needed to be returned to the client
  */
-export const replyFieldsFilter = ({ response, fields }: { response: object, fields: string }) => jsonMask(response, fields)
+export const replyFieldsFilter = ({ response, $fields }: { response: any, $fields: any }) => jsonMask(response, $fields)

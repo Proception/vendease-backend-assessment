@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import {getEpisodes, searchCharacterEpisodes,} from "../../services/episodes";
 import { ApiResponse, errorCodes } from '../../util/shared';
 import logger from '../../util/logger'
+import {replyFieldsFilter} from "../components/reply-fields-filter";
 
 /**
  *
@@ -14,12 +15,12 @@ import logger from '../../util/logger'
  */
 const GetEpisodesController = async (req: Request, res: Response) => {
     try {
-        const { characterId } = req.query
-        const episodes = await getEpisodes();
-        res.send(ApiResponse({ code: 0, msg: errorCodes[0], data: episodes }));
+        const { characterId, $fields } = req.query;
+        const episodes = await getEpisodes(Number(characterId));
+        res.send(ApiResponse({ code: 200, msg: errorCodes[200], data: replyFieldsFilter({ response: episodes, $fields }) }));
     } catch (error) {
         logger.error(error)
-        res.send(ApiResponse({ code: 2, msg: errorCodes[2], errors: [error] }))
+        res.send(ApiResponse({ code: 500, msg: errorCodes[500], errors: [error] }))
     }
 }
 
@@ -37,10 +38,10 @@ const SearchCharacterEpisodesController = async (req: Request, res: Response) =>
         const { characterName } = req.query
 
         const episodes = await searchCharacterEpisodes(typeof characterName === "string" ? characterName : '');
-        res.send(ApiResponse({ code: 0, msg: errorCodes[0], data: episodes }));
+        res.send(ApiResponse({ code: 200, msg: errorCodes[200], data: episodes }));
     } catch (error) {
         logger.error(error)
-        res.send(ApiResponse({ code: 2, msg: errorCodes[2], errors: [error] }))
+        res.send(ApiResponse({ code: 500, msg: errorCodes[500], errors: [error] }))
     }
 }
 

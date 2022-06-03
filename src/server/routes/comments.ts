@@ -13,13 +13,11 @@ const Router = express.Router()
  *
  */
 Router.post('/',
-    // [
-    // body('startDate').exists().isDate(),
-    // body('endDate').exists().isDate(),
-    // body('minCount').exists().isNumeric().custom(countValidator),
-    // body('maxCount').exists().isNumeric().custom(countValidator),
-    // ],
-    // payloadValidator,
+    [
+    body('comment').exists().isString().isLength({min: 4, max: 249}),
+    body('episodeId').exists().isNumeric(),
+    ],
+    payloadValidator,
     CreateCommentController
 )
 

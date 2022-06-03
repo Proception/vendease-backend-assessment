@@ -1,7 +1,7 @@
 // @ts-nocheck
-import sequelizeInstance from "../components/sequelize";
-
 const { DataTypes } = require("sequelize");
+
+import sequelizeInstance from "../components/sequelize";
 
 export const LocationModel = require("./location")(
   sequelizeInstance,

@@ -10,5 +10,5 @@ import {ApiResponse, errorCodes} from "../../util/shared";
  * @description Catches route errors
  */
 export const catchAll = (err: Error, req: Request,res: Response, next: NextFunction) => {
-    res.status(500).send(ApiResponse({ code: 2, msg: errorCodes[2], errors: err }))
+    res.status(500).send(ApiResponse({ code: 500, msg: errorCodes[500], errors: err }))
 }

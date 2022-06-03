@@ -14,12 +14,17 @@ import logger from '../../util/logger';
  */
 const FindCharactersController = async (req: Request, res: Response) => {
     try {
-        const { sort, filters } = req.body;
-        const characters = await findCharacters({ sort, filters });
-        res.send(ApiResponse({ code: 0, msg: errorCodes[0], data: characters }));
+        const { sorts, filters } = req.body;
+
+        const characters = await findCharacters(
+            {
+                sorts: { gender: sorts?.gender, firstName: sorts?.firstName, lastName: sorts?.lastName },
+                filters: { gender: filters?.gender, status: filters?.status, location: filters?.location }
+            });
+        res.send(ApiResponse({ code: 200, msg: errorCodes[200], data: characters }));
     } catch (error) {
         logger.error(error)
-        res.send(ApiResponse({ code: 2, msg: errorCodes[2], errors: [error] }))
+        res.send(ApiResponse({ code: 500, msg: errorCodes[500], errors: [error] }))
     }
 }
 

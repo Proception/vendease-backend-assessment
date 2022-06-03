@@ -1,3 +1,5 @@
+import logger from "../util/logger";
+
 const Sequelize = require("sequelize");
 
 import {
@@ -7,7 +9,7 @@ import {
   CharacterModel,
 } from "../models";
 
-const getEpisodes = async () => {
+const getAllEpisodes = async () => {
   const episodes = await EpisodeModel.findAll({
     order: [["releaseDate", "ASC"]],
     include: [
@@ -16,13 +18,57 @@ const getEpisodes = async () => {
       },
     ],
   });
+
   const episodesList = [];
   for (const episode of episodes) {
     const currentEpisode = episode.get({ plain: true });
     currentEpisode.commentCount = currentEpisode.Comments.length;
     episodesList.push(currentEpisode);
   }
+
   return episodesList;
+}
+
+const getEpisodeByCharacterId = async (characterId: number) => {
+  const episodes = await CharacterEpisodeModel.findAll({
+    where: {
+      characterId
+    },
+    include: [
+      {
+        model: EpisodeModel,
+        order: [["releaseDate", "ASC"]],
+        include: [
+          {
+            model: CommentModel,
+          },
+        ]
+      },
+    ],
+  });
+
+  const episodesList = [];
+  for (const episode of episodes) {
+    const currentEpisode = episode.get({ plain: true });
+    currentEpisode.Episode.commentCount = currentEpisode.Episode.Comments.length;
+    episodesList.push(currentEpisode.Episode);
+  }
+
+  return episodesList;
+}
+
+const getEpisodes = async (characterId?:number) => {
+  let episodes;
+
+  if (characterId) {
+    episodes = getEpisodeByCharacterId(characterId);
+  }
+
+  if (!characterId) {
+    episodes = await getAllEpisodes();
+  }
+
+  return episodes;
 };
 
 const searchCharacterEpisodes = async (characterName: string) => {
@@ -30,10 +76,10 @@ const searchCharacterEpisodes = async (characterName: string) => {
     where: {
       [Sequelize.Op.or]: [
         {
-          "$Character.firstName$": { [Sequelize.Op.like]: characterName },
+          "$Character.firstName$": Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('firstName')), 'LIKE', `%${characterName}%`),
         },
         {
-          "$Character.lastName$": { [Sequelize.Op.like]: characterName },
+          "$Character.lastName$": Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('lastName')), 'LIKE', `%${characterName}%`),
         },
       ],
     },

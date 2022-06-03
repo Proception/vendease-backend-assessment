@@ -10,5 +10,5 @@ import {ApiResponse, errorCodes} from "../../util/shared";
  * @description handles Resource not found errors
  */
 export const notFound = (req: Request,res: Response) => {
-    res.status(404).send(ApiResponse({code: 3, msg: errorCodes[3]}))
+    res.status(404).send(ApiResponse({code: 404, msg: errorCodes[404]}))
 }
